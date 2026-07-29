@@ -1,12 +1,15 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MelhorPreço</title>
+    <title th:text="${nomeProjeto}">MelhorPreço</title>
 </head>
 <body>
-<h1>MelhorPreço</h1>
-<p>Compare preços de periféricos e acompanhe suas variações.</p>
+<h1 th:text="${nomeProjeto}">MelhorPreço</h1>
+
+<p th:text="${descricao}">
+    Compare preços de periféricos e acompanhe suas variações.
+</p>
 </body>
 </html>
