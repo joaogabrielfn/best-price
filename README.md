@@ -1,17 +1,16 @@
-# MelhorPreço
+# BestPrice
 
-O MelhorPreço é uma aplicação web para comparar preços de periféricos de
-tecnologia em diferentes lojas e acompanhar suas variações ao longo do tempo.
+BestPrice is a web application for comparing prices of technology peripherals across different stores and tracking their fluctuations over time.
 
-## Primeira versão
+## First Release
 
-- Pesquisar produtos
-- Filtrar produtos por categoria
-- Comparar ofertas de diferentes lojas
-- Destacar a oferta mais barata
-- Exibir o histórico de preços em gráficos
+- Search for products
+- Filter products by category
+- Compare offers from different stores
+- Highlight the cheapest offer
+- Display price history in charts
 
-## Tecnologias planejadas
+## Planned technologies
 
 - Java 21
 - Spring Boot
