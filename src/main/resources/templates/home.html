@@ -5,11 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title th:text="${nomeProjeto}">MelhorPreço</title>
 </head>
-<body>
-<h1 th:text="${nomeProjeto}">MelhorPreço</h1>
 
-<p th:text="${descricao}">
-    Compare preços de periféricos e acompanhe suas variações.
-</p>
+<body>
+    <h1 th:text="${nomeProjeto}">MelhorPreço</h1>
+
+    <p th:text="${descricao}">
+        Compare preços de periféricos e acompanhe suas variações.
+    </p>
+
+    <section>
+        <h2>Produto em destaque</h2>
+
+        <article>
+            <h3 th:text="${produto.nome}">Nome do produto</h3>
+            <p th:text="${produto.marca}">Marca</p>
+            <p th:text="${produto.categoria}">Categoria</p>
+
+            <strong th:text="|R$ ${produto.menorPreco}|">
+                R$ 0,00
+            </strong>
+        </article>
+    </section>
 </body>
 </html>
