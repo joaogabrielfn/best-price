@@ -1,13 +1,14 @@
 # BestPrice
 
-BestPrice is a web application for comparing prices of technology peripherals across different stores and tracking their fluctuations over time.
+BestPrice is a web application for comparing prices of technology peripherals
+across different stores and tracking their changes over time.
 
-## First Release
+## First release
 
 - Search for products
 - Filter products by category
 - Compare offers from different stores
-- Highlight the cheapest offer
+- Highlight the lowest-priced offer
 - Display price history in charts
 
 ## Planned technologies
@@ -15,7 +16,7 @@ BestPrice is a web application for comparing prices of technology peripherals ac
 - Java 21
 - Spring Boot
 - Thymeleaf
-- HTML, CSS e JavaScript
+- HTML, CSS, and JavaScript
 - MySQL
 - Chart.js
 - Maven

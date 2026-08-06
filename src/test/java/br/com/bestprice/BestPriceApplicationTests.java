@@ -1,10 +1,10 @@
-package br.com.melhorpreco;
+package br.com.bestprice;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class MelhorPrecoApplicationTests {
+class BestPriceApplicationTests {
 
     @Test
     void contextLoads() {

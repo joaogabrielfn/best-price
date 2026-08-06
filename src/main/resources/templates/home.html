@@ -1,28 +1,28 @@
 <!DOCTYPE html>
-<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title th:text="${nomeProjeto}">MelhorPreço</title>
+    <title th:text="${projectName}">BestPrice</title>
 </head>
 
 <body>
-    <h1 th:text="${nomeProjeto}">MelhorPreço</h1>
+    <h1 th:text="${projectName}">BestPrice</h1>
 
-    <p th:text="${descricao}">
-        Compare preços de periféricos e acompanhe suas variações.
+    <p th:text="${description}">
+        Compare peripheral prices and track their changes.
     </p>
 
     <section>
-        <h2>Produto em destaque</h2>
+        <h2>Featured product</h2>
 
         <article>
-            <h3 th:text="${produto.nome}">Nome do produto</h3>
-            <p th:text="${produto.marca}">Marca</p>
-            <p th:text="${produto.categoria}">Categoria</p>
+            <h3 th:text="${product.name}">Product name</h3>
+            <p th:text="${product.brand}">Brand</p>
+            <p th:text="${product.category}">Category</p>
 
-            <strong th:text="|R$ ${produto.menorPreco}|">
-                R$ 0,00
+            <strong th:text="|R$ ${product.lowestPrice}|">
+                R$ 0.00
             </strong>
         </article>
     </section>

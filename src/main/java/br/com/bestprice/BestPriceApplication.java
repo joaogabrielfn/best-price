@@ -1,12 +1,12 @@
-package br.com.melhorpreco;
+package br.com.bestprice;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class MelhorPrecoApplication {
+public class BestPriceApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(MelhorPrecoApplication.class, args);
+        SpringApplication.run(BestPriceApplication.class, args);
     }
 }

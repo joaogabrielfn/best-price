@@ -11,11 +11,11 @@
         <relativePath/>
     </parent>
 
-    <groupId>br.com.melhorpreco</groupId>
-    <artifactId>melhor-preco</artifactId>
+    <groupId>br.com.bestprice</groupId>
+    <artifactId>best-price</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>MelhorPreço</name>
-    <description>Comparador de preços de periféricos de tecnologia</description>
+    <name>BestPrice</name>
+    <description>Price comparison platform for technology peripherals</description>
 
     <properties>
         <java.version>21</java.version>
