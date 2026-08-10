@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,9 +15,9 @@
     </p>
 
     <section>
-        <h2>Featured product</h2>
+        <h2>Featured products</h2>
 
-        <article>
+        <article th:each="product : ${products}">
             <h3 th:text="${product.name}">Product name</h3>
             <p th:text="${product.brand}">Brand</p>
             <p th:text="${product.category}">Category</p>
@@ -27,4 +28,5 @@
         </article>
     </section>
 </body>
+
 </html>
