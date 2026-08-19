@@ -62,4 +62,8 @@ public class Product {
     public BigDecimal getLowestPrice() {
         return lowestPrice;
     }
+
+    public void setLowestPrice(BigDecimal lowestPrice) {
+        this.lowestPrice = lowestPrice;
+    }
 }

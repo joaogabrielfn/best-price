@@ -25,6 +25,8 @@
             <strong th:text="|R$ ${product.lowestPrice}|">
                 R$ 0.00
             </strong>
+
+            <a th:href="@{/products/{id}(id=${product.id})}">Compare prices</a>
         </article>
     </section>
 </body>

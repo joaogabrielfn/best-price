@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="|${product.name} - BestPrice|">Product - BestPrice</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <a th:href="@{/}">Back to products</a>
+    <main>
+        <header>
+            <p th:text="${product.category}">Category</p>
+            <h1 th:text="${product.name}">Product name</h1>
+            <p th:text="${product.brand}">Brand</p>
+            <strong th:text="|Best price: R$ ${product.lowestPrice}|">Best price</strong>
+        </header>
+        <section>
+            <h2>Price history</h2>
+            <p th:if="${#lists.isEmpty(historyPrices)}">No price history available yet.</p>
+            <canvas th:unless="${#lists.isEmpty(historyPrices)}" id="priceChart"></canvas>
+        </section>
+        <section>
+            <h2>Available offers</h2>
+            <p th:if="${#lists.isEmpty(offers)}">No active offers found.</p>
+            <article th:each="offer, status : ${offers}">
+                <p th:if="${status.first}">Best offer</p>
+                <h3 th:text="${offer.store.name}">Store</h3>
+                <strong th:text="|R$ ${offer.price}|">R$ 0.00</strong>
+                <a th:href="${offer.productUrl}" target="_blank" rel="noopener noreferrer">Visit store</a>
+            </article>
+        </section>
+    </main>
+    <script th:if="${!#lists.isEmpty(historyPrices)}" th:inline="javascript">
+        const labels = /*[[${historyLabels}]]*/ [];
+        const prices = /*[[${historyPrices}]]*/ [];
+        new Chart(document.getElementById('priceChart'), {
+            type: 'line',
+            data: { labels, datasets: [{
+                label: 'Price (R$)', data: prices, borderColor: '#5b5bd6',
+                backgroundColor: 'rgba(91, 91, 214, 0.15)', tension: 0.3, fill: true
+            }]},
+            options: { responsive: true, scales: { y: { beginAtZero: false } } }
+        });
+    </script>
+</body>
+</html>
