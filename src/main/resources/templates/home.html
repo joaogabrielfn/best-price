@@ -1,34 +1,31 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Compare technology peripheral prices and track price changes.">
     <title th:text="${projectName}">BestPrice</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
 </head>
-
 <body>
-    <h1 th:text="${projectName}">BestPrice</h1>
-
-    <p th:text="${description}">
-        Compare peripheral prices and track their changes.
-    </p>
-
-    <section>
-        <h2>Featured products</h2>
-
-        <article th:each="product : ${products}">
-            <h3 th:text="${product.name}">Product name</h3>
-            <p th:text="${product.brand}">Brand</p>
-            <p th:text="${product.category}">Category</p>
-
-            <strong th:text="|R$ ${product.lowestPrice}|">
-                R$ 0.00
-            </strong>
-
-            <a th:href="@{/products/{id}(id=${product.id})}">Compare prices</a>
-        </article>
+<nav class="navbar"><a class="brand" th:href="@{/}"><span class="brand-mark">BP</span><span>BestPrice</span></a><span class="nav-badge">Portfolio project</span></nav>
+<main>
+    <section class="hero">
+        <div class="hero-content"><span class="eyebrow">Smarter tech shopping</span><h1>Find the right peripheral at the <span>best price.</span></h1><p th:text="${description}">Compare peripheral prices and track their changes.</p><a class="button button-primary" href="#products">Explore products</a></div>
+        <div class="hero-panel" aria-hidden="true"><div class="metric-card"><span>Tracked products</span><strong th:text="${#lists.size(products)}">3</strong><small>Across trusted stores</small></div><div class="floating-chip chip-one">Price history</div><div class="floating-chip chip-two">Best offer</div></div>
     </section>
+    <section class="catalog" id="products">
+        <div class="section-heading"><div><span class="eyebrow">Featured comparisons</span><h2>Popular peripherals</h2></div><p>Compare current offers and explore how prices changed over time.</p></div>
+        <div class="product-grid">
+            <article class="product-card" th:each="product : ${products}">
+                <div class="product-visual"><span class="category-icon" th:text="${#strings.substring(product.category, 0, 1)}">M</span><span class="category-pill" th:text="${product.category}">Category</span></div>
+                <div class="product-content"><span class="product-brand" th:text="${product.brand}">Brand</span><h3 th:text="${product.name}">Product name</h3><div class="price-block"><small>Starting at</small><strong th:text="|R$ ${product.lowestPrice}|">R$ 0.00</strong></div><a class="button button-secondary" th:href="@{/products/{id}(id=${product.id})}">Compare prices <span>→</span></a></div>
+            </article>
+        </div>
+    </section>
+    <aside class="demo-notice"><strong>Demonstration data</strong><p>Prices, availability and store links are illustrative and may not reflect current information.</p></aside>
+</main>
+<footer><a class="brand footer-brand" th:href="@{/}"><span class="brand-mark">BP</span><span>BestPrice</span></a><p>Built with Java, Spring Boot, Thymeleaf and MySQL.</p></footer>
 </body>
-
 </html>

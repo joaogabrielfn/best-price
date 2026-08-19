@@ -1,47 +1,25 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title th:text="|${product.name} - BestPrice|">Product - BestPrice</title>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/styles.css}"><script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-    <a th:href="@{/}">Back to products</a>
-    <main>
-        <header>
-            <p th:text="${product.category}">Category</p>
-            <h1 th:text="${product.name}">Product name</h1>
-            <p th:text="${product.brand}">Brand</p>
-            <strong th:text="|Best price: R$ ${product.lowestPrice}|">Best price</strong>
-        </header>
-        <section>
-            <h2>Price history</h2>
-            <p th:if="${#lists.isEmpty(historyPrices)}">No price history available yet.</p>
-            <canvas th:unless="${#lists.isEmpty(historyPrices)}" id="priceChart"></canvas>
-        </section>
-        <section>
-            <h2>Available offers</h2>
-            <p th:if="${#lists.isEmpty(offers)}">No active offers found.</p>
-            <article th:each="offer, status : ${offers}">
-                <p th:if="${status.first}">Best offer</p>
-                <h3 th:text="${offer.store.name}">Store</h3>
-                <strong th:text="|R$ ${offer.price}|">R$ 0.00</strong>
-                <a th:href="${offer.productUrl}" target="_blank" rel="noopener noreferrer">Visit store</a>
-            </article>
-        </section>
-    </main>
-    <script th:if="${!#lists.isEmpty(historyPrices)}" th:inline="javascript">
-        const labels = /*[[${historyLabels}]]*/ [];
-        const prices = /*[[${historyPrices}]]*/ [];
-        new Chart(document.getElementById('priceChart'), {
-            type: 'line',
-            data: { labels, datasets: [{
-                label: 'Price (R$)', data: prices, borderColor: '#5b5bd6',
-                backgroundColor: 'rgba(91, 91, 214, 0.15)', tension: 0.3, fill: true
-            }]},
-            options: { responsive: true, scales: { y: { beginAtZero: false } } }
-        });
-    </script>
+<nav class="navbar"><a class="brand" th:href="@{/}"><span class="brand-mark">BP</span><span>BestPrice</span></a><a class="back-link" th:href="@{/}">← Back to products</a></nav>
+<main class="details-page">
+    <header class="product-hero"><div class="details-visual"><span class="category-icon large" th:text="${#strings.substring(product.category, 0, 1)}">M</span></div><div class="product-summary"><span class="category-pill" th:text="${product.category}">Category</span><h1 th:text="${product.name}">Product name</h1><p>by <strong th:text="${product.brand}">Brand</strong></p><div class="best-price"><small>Best price found</small><strong th:text="|R$ ${product.lowestPrice}|">R$ 0.00</strong><span th:if="${!#lists.isEmpty(offers)}" th:text="|at ${offers[0].store.name}|">at Store</span></div></div></header>
+    <div class="details-grid">
+        <section class="content-panel"><div class="panel-heading"><div><span class="eyebrow">Price intelligence</span><h2>Price history</h2></div><span class="period-badge">Last 30 days</span></div><p class="empty-state" th:if="${#lists.isEmpty(historyPrices)}">No price history available yet.</p><div class="chart-container" th:unless="${#lists.isEmpty(historyPrices)}"><canvas id="priceChart"></canvas></div></section>
+        <section class="content-panel"><div class="panel-heading"><div><span class="eyebrow">Live comparison</span><h2>Available offers</h2></div><span class="offer-count" th:text="|${#lists.size(offers)} offers|">0 offers</span></div><p class="empty-state" th:if="${#lists.isEmpty(offers)}">No active offers found.</p><div class="offer-list"><article class="offer-row" th:each="offer, status : ${offers}" th:classappend="${status.first} ? ' best-offer'"><div class="store-info"><span class="store-logo" th:text="${#strings.substring(offer.store.name, 0, 1)}">S</span><div><span class="best-label" th:if="${status.first}">BEST OFFER</span><h3 th:text="${offer.store.name}">Store</h3></div></div><strong class="offer-price" th:text="|R$ ${offer.price}|">R$ 0.00</strong><a class="button button-secondary compact" th:href="${offer.productUrl}" target="_blank" rel="noopener noreferrer">Visit store ↗</a></article></div></section>
+    </div>
+    <aside class="demo-notice"><strong>Demonstration data</strong><p>Offers and history are illustrative for this portfolio project.</p></aside>
+</main>
+<script th:if="${!#lists.isEmpty(historyPrices)}" th:inline="javascript">
+const labels=/*[[${historyLabels}]]*/[];const prices=/*[[${historyPrices}]]*/[];
+new Chart(document.getElementById('priceChart'),{type:'line',data:{labels,datasets:[{label:'Price (R$)',data:prices,borderColor:'#6d5dfc',backgroundColor:'rgba(109,93,252,.12)',pointBackgroundColor:'#6d5dfc',pointRadius:5,borderWidth:3,tension:.35,fill:true}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{display:false},ticks:{color:'#7b7b91'}},y:{beginAtZero:false,grid:{color:'#ececf4'},ticks:{color:'#7b7b91',callback:value=>'R$ '+value}}}}});
+</script>
 </body>
 </html>
