@@ -17,10 +17,18 @@
     </section>
     <section class="catalog" id="products">
         <div class="section-heading"><div><span class="eyebrow">Featured comparisons</span><h2>Popular peripherals</h2></div><p>Compare current offers and explore how prices changed over time.</p></div>
+        <form class="search-bar" method="get" th:action="@{/}">
+            <label class="search-field"><span>Search</span><input type="search" name="q" th:value="${query}" placeholder="Product or brand"></label>
+            <label class="search-field"><span>Category</span><select name="category"><option value="">All categories</option><option th:each="category : ${categories}" th:value="${category}" th:text="${category}" th:selected="${category == selectedCategory}">Category</option></select></label>
+            <button class="button button-primary" type="submit">Search products</button>
+            <a class="clear-filter" th:if="${!query.isEmpty() || !selectedCategory.isEmpty()}" th:href="@{/}">Clear filters</a>
+        </form>
+        <div class="results-summary"><strong th:text="${#lists.size(products)}">0</strong><span th:text="${#lists.size(products) == 1 ? ' product found' : ' products found'}"> products found</span></div>
+        <div class="empty-products" th:if="${#lists.isEmpty(products)}"><span>⌕</span><h3>No products found</h3><p>Try another product name, brand or category.</p><a class="button button-secondary" th:href="@{/}">View all products</a></div>
         <div class="product-grid">
             <article class="product-card" th:each="product : ${products}">
                 <div class="product-visual"><span class="category-icon" th:text="${#strings.substring(product.category, 0, 1)}">M</span><span class="category-pill" th:text="${product.category}">Category</span></div>
-                <div class="product-content"><span class="product-brand" th:text="${product.brand}">Brand</span><h3 th:text="${product.name}">Product name</h3><div class="price-block"><small>Starting at</small><strong th:text="|R$ ${product.lowestPrice}|">R$ 0.00</strong></div><a class="button button-secondary" th:href="@{/products/{id}(id=${product.id})}">Compare prices <span>→</span></a></div>
+                <div class="product-content"><span class="product-brand" th:text="${product.brand}">Brand</span><h3 th:text="${product.name}">Product name</h3><div class="price-block"><small>Starting at</small><strong th:text="${'R$ ' + #numbers.formatDecimal(product.lowestPrice, 1, 2)}">R$ 0.00</strong></div><a class="button button-secondary" th:href="@{/products/{id}(id=${product.id})}">Compare prices <span>→</span></a></div>
             </article>
         </div>
     </section>
